@@ -1,3 +1,6 @@
 [submodule "pingcpp"]
 	path = pingcpp
 	url = https://github.com/oskarirauta/pingcpp.git
+[submodule "common"]
+	path = common
+	url = https://github.com/oskarirauta/common_cpp.git
