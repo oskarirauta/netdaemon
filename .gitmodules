@@ -1,0 +1,3 @@
+[submodule "pingcpp"]
+	path = pingcpp
+	url = https://github.com/oskarirauta/pingcpp.git
