@@ -8,10 +8,12 @@
 
 namespace app {
 
-	static const std::string name = "netguard";
+	static const std::string name = "netdaemon";
 	static const std::string version = "0.8.0";
 	static const std::string git_commit(GIT_COMMIT);
 
-	void version_title();
 	void version_info();
+	void author_info();
+	void usage(char* cmd);
+	void parse_cmdline(int argc, char **argv);
 }

@@ -1,0 +1,15 @@
+CXX?=g++
+CXXFLAGS?=--std=c++23
+EXTRA_CXXFLAGS?=
+LDFLAGS?=-L/usr/lib -L/lib
+
+INCLUDES?=-I./include -I./podman/include -I.
+
+UBUS_OBJS:=objs/ubus.o objs/ubus_netguard.o
+UBUS_LIBS:=-lubox -lblobmsg_json -luci -lubus
+
+objs/ubus.o: ubus/ubus.cpp
+	$(CXX) $(CXXFLAGS) $(EXTRA_CXXFLAGS) $(INCLUDES) -c -o $@ $<;
+
+objs/ubus_netguard.o: ubus/ubus_netguard.cpp
+	$(CXX) $(CXXFLAGS) $(EXTRA_CXXFLAGS) $(INCLUDES) -c -o $@ $<;
