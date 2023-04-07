@@ -140,6 +140,7 @@ namespace somewhere {
 
 int main(int argc, char **argv) {
 
+	// note that using EnumOps namespace is mandatory for this to work
 	using namespace EnumOps;
 	auto x = somewhere::bob::A;
 	std::cout << "x is A: " << ( x == somewhere::bob::A ? "true" : "false" ) << " name: " << somewhere::bobName(x) << " value: " << somewhere::bobValue(x) << std::endl;
