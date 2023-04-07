@@ -5,11 +5,14 @@ LDFLAGS?=-L/usr/lib -L/lib
 
 INCLUDES?=-I./include -I./podman/include -I.
 
-UBUS_OBJS:=objs/ubus.o objs/ubus_netdaemon.o
+UBUS_OBJS:=objs/ubus.o objs/ubus_netdaemon.o objs/ubus_client.o
 UBUS_LIBS:=-lubox -lblobmsg_json -luci -lubus
 
 objs/ubus.o: ubus/ubus.cpp
 	$(CXX) $(CXXFLAGS) $(EXTRA_CXXFLAGS) $(INCLUDES) -c -o $@ $<;
 
 objs/ubus_netdaemon.o: ubus/ubus_netdaemon.cpp
+	$(CXX) $(CXXFLAGS) $(EXTRA_CXXFLAGS) $(INCLUDES) -c -o $@ $<;
+
+objs/ubus_client.o: ubus/ubus_client.cpp
 	$(CXX) $(CXXFLAGS) $(EXTRA_CXXFLAGS) $(INCLUDES) -c -o $@ $<;
