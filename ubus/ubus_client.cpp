@@ -2,7 +2,14 @@
 
 #include "app.hpp"
 #include "logger.hpp"
+#include "common.hpp"
 #include "ubus_client.hpp"
+
+/* usage:
+        json11::Json js;
+        if ( ubus::call("system", "board", "", js))
+                std::cout << js.dump() << std::endl;
+*/
 
 bool ubus::call(std::string path, std::string method, std::string msg, json11::Json &json) {
 
@@ -20,14 +27,18 @@ bool ubus::call(std::string path, std::string method, std::string msg, json11::J
 	blob_buf_init(&_b, 0);
 
 	if ( !msg.empty() && !blobmsg_add_json_from_string(&_b, msg.c_str())) {
-		logger::error << app::name << ": ubus call failed for " << path << "::method json parse error for message " << msg << std::endl;
+
+		logger::error << app::name << ": ubus call failed for " << path << "::method json parse error for message " << common::to_lower(msg) << std::endl;
 		ubus_free(_ctx);
 		return false;
 	}
 
 	if ( ret = ubus_lookup_id(_ctx, path.c_str(), &id); ret ) {
 
-		logger::error << app::name << ": ubus lookup failed for " << path << " with error " << ubus_strerror(ret) << std::endl;
+		std::string err_msg(ubus_strerror(ret));
+		logger::error << app::name << ": ubus lookup failed for " << path << " with error: " << common::to_lower(err_msg) << std::endl;
+		if ( err_msg == "Not found" )
+			logger::vverbose << app::name << ": Do you have sufficient access permissions, maybe you need root priviledges?" << std::endl;
 		ubus_free(_ctx);
 		return false;
 	}
@@ -36,7 +47,10 @@ bool ubus::call(std::string path, std::string method, std::string msg, json11::J
 
 	if ( ret = ubus_invoke_async(_ctx, id, method.c_str(), _b.head, &req); ret ) {
 
-		logger::error << app::name << ": ubus invoke failed for " << path << "::" << method << " with error " << ubus_strerror(ret) << std::endl;
+		std::string err_msg(ubus_strerror(ret));
+		logger::error << app::name << ": ubus invoke failed for " << path << "::" << method << " with error: " << common::to_lower(err_msg) << std::endl;
+		if ( err_msg == "Not found" )
+			logger::vverbose << app::name << ": Do you have sufficient access permissions, maybe you need root priviledges?" << std::endl;
 		ubus_free(_ctx);
 		return false;
 	}
@@ -49,7 +63,11 @@ bool ubus::call(std::string path, std::string method, std::string msg, json11::J
 	};
 
 	if ( ret = ubus_complete_request(_ctx, &req, 0); ret ) {
-		logger::error << app::name << ": ubus invoke failed for " << path << "::" << method << " with error " << ubus_strerror(ret) << std::endl;
+
+		std::string err_msg(ubus_strerror(ret));
+		logger::error << app::name << ": ubus invoke failed for " << path << "::" << method << " with error: " << common::to_lower(err_msg) << std::endl;
+		if ( err_msg == "Not found" )
+			logger::vverbose << app::name << ": Do you have sufficient access permissions, maybe you need root priviledges?" << std::endl;
 		ubus_free(_ctx);
 		return false;
 	}
@@ -57,7 +75,7 @@ bool ubus::call(std::string path, std::string method, std::string msg, json11::J
 	std::string err;
 	std::string res(blobmsg_format_json_indent((blob_attr*)req.priv, true, -1));
 	if ( json = json11::Json::parse(res, err); !err.empty()) {
-		logger::error << app::name << ": ubus invoke failed for " << path << "::" << method << ", result is not valid json" <<
+		logger::error << app::name << ": ubus invoke failed for " << path << "::" << method << " with error: result did not validate as json" <<
 		logger::detail(res) << std::endl;
 		ubus_free(_ctx);
 		return false;
