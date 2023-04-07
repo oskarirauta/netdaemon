@@ -2,6 +2,7 @@
 
 #include "mutex.hpp"
 #include "ubus.hpp"
+#include "ubus_client.hpp"
 #include "logger.hpp"
 #include "loop.hpp"
 
@@ -51,9 +52,9 @@ void Loop::run(void) {
 	if ( this -> running())
 		return;
 
-	this -> set_running(true);
 	int __delay = this -> delay();
 
+	this -> set_running(true);
 	this -> sleep((int)(__delay * 0.5));
 
 	while ( !this -> sig_exit()) {
@@ -64,7 +65,6 @@ void Loop::run(void) {
 	}
 
 	this -> set_running(false);
-
 }
 
 Loop main_loop;
