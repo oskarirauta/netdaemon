@@ -19,7 +19,7 @@ include pingcpp/Makefile.inc
 include logger/Makefile.inc
 include Makefile.ubus
 
-world: netdaermon
+world: netdaemon
 
 objs/app.o: src/app.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c -o $@ $<;
