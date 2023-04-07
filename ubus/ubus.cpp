@@ -5,7 +5,7 @@
 
 #include "app.hpp"
 #include "logger.hpp"
-#include "ubus_netguard.hpp"
+#include "ubus_netdaemon.hpp"
 #include "ubus.hpp"
 
 std::string ubus_socket = "";
