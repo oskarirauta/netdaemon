@@ -2,6 +2,7 @@
 
 #include "logger.hpp"
 #include "ubus.hpp"
+#include "settings.hpp"
 #include "app.hpp"
 
 void app::version_info() {
@@ -17,14 +18,15 @@ void app::author_info() {
 
 void app::usage(char* cmd) {
 	std::cout << "\nusage: " << cmd << " [parameters]\n\n";
-	std::cout << "   -h, --h             show this help\n";
-	std::cout << "   --version           show version\n";
-	std::cout << "   -s, --socket path   connect to specified ubus socket\n";
-	std::cout << "   -q, --quiet         silence output\n";
-	std::cout << "   --only-errors       output only errors\n";
-	std::cout << "   -v, --verbose       verbose output\n";
-	std::cout << "   -vv                 more verbose output\n";
-	std::cout << "   --debug             maximum verbose output\n";
+	std::cout << "   -h, --h                 show this help\n";
+	std::cout << "   --version               show version\n";
+	std::cout << "   -s, --socket path       connect to specified ubus socket\n";
+	std::cout << "   -i, --interface ifd     monitor ifd interface as wan (default: wan)\n";
+	std::cout << "   -q, --quiet             silence output\n";
+	std::cout << "   --only-errors           output only errors\n";
+	std::cout << "   -v, --verbose           verbose output\n";
+	std::cout << "   -vv                     more verbose output\n";
+	std::cout << "   --debug                 maximum verbose output\n";
 	std::cout << std::endl;
 }
 
@@ -35,7 +37,7 @@ void app::parse_cmdline(int argc, char **argv) {
 
 	for (auto i = args.begin(); i != args.end(); i++) {
 
-		if ( *i == "--help" || *i == "--h" || *i == "-h" || *i == "-?" ) {
+		if ( *i == "--help" || *i == "--h" || *i == "-h" || *i == "-?" || *i == "--usage" || *i == "-usage" ) {
 			app::version_info();
 			app::author_info();
 			app::usage(argv[0]);
@@ -88,6 +90,16 @@ void app::parse_cmdline(int argc, char **argv) {
 				std::cout << "error: socket's path not given for " << this_arg << " option." << std::endl;
 				exit(-1);
 			}
+		} else if ( *i == "-i" || *i == "--i" || *i == "-interface" || *i == "--interface" || *i == "-ifd" || *i == "--ifd" ) {
+			std::string this_arg = *i;
+			if ( std::next(i) != args.end())
+				settings::wan_ifd = std::string(*++i);
+			else {
+				std::cout << "error: interface name not given for " << this_arg << " option." << std::endl;
+				exit(-1);
+			}
+
+			// TODO: check that ifd exists..
 
 		} else if ( *i == "-version" || *i == "--version" ) {
 			app::version_info();
