@@ -3,16 +3,36 @@
 #include <thread>
 
 #include "app.hpp"
+#include "settings.hpp"
 #include "logger.hpp"
 #include "mutex.hpp"
 #include "loop.hpp"
 #include "ubus.hpp"
 
 #include "clock_time.hpp"
+#include "json11.hpp"
 
 int main(int argc, char **argv) {
 
+	json11::Json my_json = json11::Json::object {
+		{ "key1", "value1" },
+		{ "key2", false },
+		{ "key3", json11::Json::array { 1, 2, 3 } },
+	};
+	std::string json_str = my_json.dump();
+	std::cout << "dump: " << json_str << std::endl;
+
+	if ( my_json["key1"].is_string())
+		std::cout << "key1: " << my_json["key1"].string_value() << std::endl;
+	if ( my_json["key5"].is_string())
+		std::cout << "key5: " << my_json["key5"].string_value() << std::endl;
+
+	return 0;
+
 	app::parse_cmdline(argc, argv);
+
+	// TODO: default should be "wan"
+	settings::wan_ifd = "lan";
 
 	uloop_init();
 
