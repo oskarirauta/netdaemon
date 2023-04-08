@@ -3,6 +3,8 @@
 #include "states.hpp"
 #include "scheduler.hpp"
 
+ENABLE_ENUM_OPS(state_enum);
+
 void run_task(void) {
 
 	using namespace EnumOps;

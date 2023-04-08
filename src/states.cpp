@@ -5,5 +5,6 @@ bool states::wan_online = false;
 int states::ping_host_index = 0;
 int states::state_delay = 1000;
 bool states::should_override_speedtest = false;
+int failed_ping_count = 0;
 
-states::state_enum states::current = STATE_IDLE;
+state_enum states::current = STATE_IDLE;

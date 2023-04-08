@@ -10,7 +10,7 @@ enum state_enum {
 	STATE_SPEEDTEST,
 	STATE_RENEW,
 	MAX_VALUE
-}; ENABLE_ENUM_OPS(state_enum);
+};
 
 namespace states {
 
@@ -19,6 +19,7 @@ namespace states {
 	extern int ping_host_index;
 	extern int state_delay;
 	extern bool should_override_speedtest;
+	extern int failed_ping_count;
 
 	extern state_enum current;
 }
