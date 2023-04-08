@@ -22,6 +22,7 @@ namespace states {
 	extern int state_delay;
 	extern bool should_override_speedtest;
 	extern int failed_ping_count;
+	extern bool needs_renew;
 
 	extern state_enum current;
 }
