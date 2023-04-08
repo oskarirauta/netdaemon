@@ -3,16 +3,16 @@
 #include <string>
 #include "enumops.hpp"
 
-namespace states {
+enum state_enum {
+	STATE_IDLE,
+	STATE_WAN_CHECK,
+	STATE_PING_CHECK,
+	STATE_SPEEDTEST,
+	STATE_RENEW,
+	MAX_VALUE
+}; ENABLE_ENUM_OPS(state_enum);
 
-	enum state_enum {
-		STATE_IDLE,
-		STATE_WAN_CHECK,
-		STATE_RENEW,
-		STATE_SPEEDTEST,
-		STATE_SPEEDTEST_OVERRIDED,
-		STATE_LAST
-	}; ENABLE_ENUM_OPS(state_enum);
+namespace states {
 
 	extern bool wan_enabled;
 	extern bool wan_online;
