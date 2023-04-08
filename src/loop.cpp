@@ -4,6 +4,7 @@
 #include "ubus.hpp"
 #include "ubus_client.hpp"
 #include "logger.hpp"
+#include "scheduler.hpp"
 #include "loop.hpp"
 
 bool Loop::sig_exit(void) {
@@ -59,8 +60,7 @@ void Loop::run(void) {
 
 	while ( !this -> sig_exit()) {
 
-		// do our tasks here
-
+		run_task();
 		this -> sleep(__delay);
 	}
 
