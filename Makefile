@@ -9,7 +9,7 @@ LIBS:=
 OBJS:= \
 	objs/json11.o \
 	objs/app.o objs/settings.o objs/states.o \
-	objs/mutex.o objs/signal.o \
+	objs/clock_time.o objs/mutex.o objs/signal.o \
 	objs/loop.o \
 	objs/main.o
 
@@ -32,6 +32,9 @@ objs/settings.o: src/settings.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c -o $@ $<;
 
 objs/states.o: src/states.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c -o $@ $<;
+
+objs/clock_time.o: src/clock_time.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c -o $@ $<;
 
 objs/mutex.o: src/mutex.cpp

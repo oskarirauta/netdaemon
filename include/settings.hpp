@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include "clock_time.hpp"
 
 namespace settings {
 
@@ -9,6 +10,9 @@ namespace settings {
 	extern bool auto_renew;
 	extern bool speed_testing;
 
+	extern int speed_test_interval;
+
 	extern std::vector<std::string> ping_hosts;
+	extern std::vector<timespan> speedtest_exclude_times;
 
 }

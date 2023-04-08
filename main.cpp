@@ -8,6 +8,8 @@
 #include "loop.hpp"
 #include "ubus.hpp"
 
+#include "clock_time.hpp"
+
 int main(int argc, char **argv) {
 
 	app::parse_cmdline(argc, argv);
