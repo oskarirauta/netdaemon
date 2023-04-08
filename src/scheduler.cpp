@@ -22,6 +22,12 @@ void run_task(void) {
 		case STATE_SPEEDTEST:
 			std::cout << "perform speedtest if we are online and it's time to do it.." << std::endl;
 			break;
+		case STATE_DISCONNECT:
+			std::cout << "disconnect (ifdown wan) if renew is necessary" << std::endl;
+			break;
+		case STATE_WAIT:
+			std::cout << "wait for few seconds before renewing wan if necessary" << std::endl;
+			break;
 		case STATE_RENEW:
 			std::cout << "renew if threshold has overflown for failed pings" << std::endl;
 			break;
