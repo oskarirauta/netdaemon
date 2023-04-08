@@ -11,7 +11,7 @@ OBJS:= \
 	objs/app.o objs/settings.o objs/states.o \
 	objs/scheduler.o \
 	objs/clock_time.o objs/mutex.o objs/signal.o \
-	objs/state_wan_check.o \
+	objs/stage_wan_check.o \
 	objs/loop.o \
 	objs/main.o
 
@@ -48,7 +48,7 @@ objs/mutex.o: src/mutex.cpp
 objs/signal.o: src/signal.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c -o $@ $<;
 
-objs/state_wan_check.o: src/state_wan_check.cpp
+objs/stage_wan_check.o: src/stage_wan_check.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c -o $@ $<;
 
 objs/loop.o: src/loop.cpp
