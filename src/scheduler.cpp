@@ -3,7 +3,7 @@
 #include "states.hpp"
 #include "scheduler.hpp"
 
-ENABLE_ENUM_OPS(state_enum);
+ENABLE_ENUM_OPS(stage_enum);
 
 void run_task(void) {
 

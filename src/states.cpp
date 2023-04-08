@@ -8,4 +8,4 @@ bool states::should_override_speedtest = false;
 int states::failed_ping_count = 0;
 bool states::needs_renew = false;
 
-state_enum states::current = STATE_IDLE;
+stage_enum states::current = STATE_IDLE;

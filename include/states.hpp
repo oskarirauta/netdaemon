@@ -3,7 +3,7 @@
 #include <string>
 #include "enumops.hpp"
 
-enum state_enum {
+enum stage_enum {
 	STATE_IDLE,
 	STATE_WAN_CHECK,
 	STATE_PING_CHECK,
@@ -24,5 +24,8 @@ namespace states {
 	extern int failed_ping_count;
 	extern bool needs_renew;
 
-	extern state_enum current;
+	extern stage_enum current;
+
+	// stages
+	void wan_check(void);
 }
