@@ -10,6 +10,7 @@ namespace settings {
 	extern bool auto_renew;
 	extern bool speed_testing;
 
+	extern int failed_pings_threshold;
 	extern int speed_test_interval;
 
 	extern std::vector<std::string> ping_hosts;
