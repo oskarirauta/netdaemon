@@ -14,6 +14,7 @@
 
 int main(int argc, char **argv) {
 
+/*
 	json11::Json my_json = json11::Json::object {
 		{ "key1", "value1" },
 		{ "key2", false },
@@ -28,7 +29,7 @@ int main(int argc, char **argv) {
 		std::cout << "key5: " << my_json["key5"].string_value() << std::endl;
 
 	return 0;
-
+*/
 	app::parse_cmdline(argc, argv);
 
 	// TODO: default should be "wan"
