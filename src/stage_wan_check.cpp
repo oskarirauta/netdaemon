@@ -2,8 +2,9 @@
 #include "settings.hpp"
 #include "ubus_client.hpp"
 #include "states.hpp"
+#include "stages.hpp"
 
-void states::wan_check(void) {
+void stage::wan_check(void) {
 
 	json11::Json js;
 	bool ret = ubus::call("network.interface." + settings::wan_ifd, "status", "", js);
