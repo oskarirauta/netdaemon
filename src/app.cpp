@@ -25,7 +25,7 @@ void app::usage(char* cmd) {
 	std::cout << "   -q, --quiet             silence output\n";
 	std::cout << "   --only-errors           output only errors\n";
 	std::cout << "   -v, --verbose           verbose output\n";
-	std::cout << "   -vv                     more verbose output\n";
+	std::cout << "   -vv, --vverbose         more verbose output\n";
 	std::cout << "   --debug                 maximum verbose output\n";
 	std::cout << std::endl;
 }
@@ -42,13 +42,13 @@ void app::parse_cmdline(int argc, char **argv) {
 			app::author_info();
 			app::usage(argv[0]);
 			exit(0);
-		} else if (( *i == "-v" || *i == "--verbose" ) && log_level < 2 ) {
+		} else if (( *i == "-v" || *i == "--v" || *i == "--verbose" || *i == "-verbose" ) && log_level < 2 ) {
 			if ( log_level < 0 ) {
 				std::cout << "error: quiet and verbose logging cannot be used at same time." << std::endl;
 				exit(-1);
 			}
 			log_level = 2;
-		} else if (( *i == "-vv" || *i == "--vv" ) && log_level < 3 ) {
+		} else if (( *i == "-vv" || *i == "--vv" || *i == "--vverbose" || *i == "-vverbose" ) && log_level < 3 ) {
 			if ( log_level < 0 ) {
 				std::cout << "error: quiet and (extra) verbose logging cannot be used at same time." << std::endl;
 				exit(-1);
