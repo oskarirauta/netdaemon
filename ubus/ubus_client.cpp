@@ -37,7 +37,7 @@ bool ubus::call(std::string path, std::string method, std::string msg, json11::J
 
 		std::string err_msg(ubus_strerror(ret));
 		logger::error << app::name << ": ubus lookup failed for " << path << " with error: " << common::to_lower(err_msg) << std::endl;
-		if ( err_msg == "Not found" )
+		if ( common::to_lower(err_msg) == "not found" )
 			logger::vverbose << app::name << ": Do you have sufficient access permissions, maybe you need root priviledges?" << std::endl;
 		ubus_free(_ctx);
 		return false;
@@ -49,7 +49,7 @@ bool ubus::call(std::string path, std::string method, std::string msg, json11::J
 
 		std::string err_msg(ubus_strerror(ret));
 		logger::error << app::name << ": ubus invoke failed for " << path << "::" << method << " with error: " << common::to_lower(err_msg) << std::endl;
-		if ( err_msg == "Not found" )
+		if ( common::to_lower(err_msg) == "not found" )
 			logger::vverbose << app::name << ": Do you have sufficient access permissions, maybe you need root priviledges?" << std::endl;
 		ubus_free(_ctx);
 		return false;
@@ -66,7 +66,7 @@ bool ubus::call(std::string path, std::string method, std::string msg, json11::J
 
 		std::string err_msg(ubus_strerror(ret));
 		logger::error << app::name << ": ubus invoke failed for " << path << "::" << method << " with error: " << common::to_lower(err_msg) << std::endl;
-		if ( err_msg == "Not found" )
+		if ( common::to_lower(err_msg) == "not found" )
 			logger::vverbose << app::name << ": Do you have sufficient access permissions, maybe you need root priviledges?" << std::endl;
 		ubus_free(_ctx);
 		return false;
